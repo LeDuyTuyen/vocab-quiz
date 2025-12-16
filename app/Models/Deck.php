@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\VocabWord;
+use App\Models\Question;
+use App\Models\QuizSession;
 
 class Deck extends Model
 {
@@ -29,6 +33,7 @@ class Deck extends Model
         return $this->hasMany(VocabWord::class);
     }
 
+    // Lấy tất cả câu hỏi thông qua VocabWord
     public function questions()
     {
         return $this->hasManyThrough(Question::class, VocabWord::class);
