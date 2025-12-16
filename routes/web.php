@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Quiz\DeckController;
+use App\Http\Controllers\Quiz\QuizController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,6 +35,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+Route::middleware(['auth', 'verified'])->prefix('quiz')->group(function () {
+    Route::get('/decks', [DeckController::class, 'index'])->name('quiz.decks.index');
+    Route::get('/decks/{deck}', [DeckController::class, 'show'])->name('quiz.decks.show');
+
+    Route::get('/decks/{deck}/start', [QuizController::class, 'start'])->name('quiz.start');
+    Route::post('/sessions/{session}/submit', [QuizController::class, 'submit'])->name('quiz.submit');
+    Route::get('/sessions/{session}', [QuizController::class, 'result'])->name('quiz.result');
 });
 
 require __DIR__.'/auth.php';
