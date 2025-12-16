@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Deck;
+use App\Models\Question;
+use App\Models\QuizAnswer;
 
 class VocabWord extends Model
 {
