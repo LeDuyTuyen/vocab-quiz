@@ -12,9 +12,12 @@ const form = useForm({
   answers: {},
 });
 
-const submitQuiz = () => {
-  form.post(route('quiz.submit', session.id));
-};
+const percentage = computed(() => {
+  if (!props.session?.total_questions) return 0;
+  return (
+    (props.session.correct_answers / props.session.total_questions) * 100
+  ).toFixed(1);
+});
 </script>
 
 <template>

@@ -8,8 +8,10 @@ const props = defineProps({
 });
 
 const percentage = computed(() => {
-  if (!session.total_questions) return 0;
-  return ((session.correct_answers / session.total_questions) * 100).toFixed(1);
+  if (!props.session?.total_questions) return 0;
+  return (
+    (props.session.correct_answers / props.session.total_questions) * 100
+  ).toFixed(1);
 });
 </script>
 
