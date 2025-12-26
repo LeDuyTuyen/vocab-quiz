@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Quiz\DeckController;
+use App\Http\Controllers\Quiz\DeckManageController;
 use App\Http\Controllers\Quiz\QuizController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,14 @@ Route::middleware(['auth', 'verified'])->prefix('quiz')->group(function () {
     Route::get('/decks/{deck}/start', [QuizController::class, 'start'])->name('quiz.start');
     Route::post('/sessions/{session}/submit', [QuizController::class, 'submit'])->name('quiz.submit');
     Route::get('/sessions/{session}', [QuizController::class, 'result'])->name('quiz.result');
+
+     // Quiz Builder - quản lý deck của user
+     Route::get('/my-decks', [DeckManageController::class, 'index'])->name('quiz.my-decks.index');
+     Route::get('/my-decks/create', [DeckManageController::class, 'create'])->name('quiz.my-decks.create');
+     Route::post('/my-decks', [DeckManageController::class, 'store'])->name('quiz.my-decks.store');
+     Route::get('/my-decks/{deck}/edit', [DeckManageController::class, 'edit'])->name('quiz.my-decks.edit');
+     Route::put('/my-decks/{deck}', [DeckManageController::class, 'update'])->name('quiz.my-decks.update');
+     Route::delete('/my-decks/{deck}', [DeckManageController::class, 'destroy'])->name('quiz.my-decks.destroy');
 });
 
 require __DIR__.'/auth.php';
